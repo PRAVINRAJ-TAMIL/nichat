@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "245690159977",
+    "project_id": "nechat-70b5b",
+    "storage_bucket": "nechat-70b5b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:245690159977:android:0071e93c7261cdbc33a3f8",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADdB4vijMW7MiUTdpAOox5nc_j_txEMjQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:245690159977:android:748eb57034e33f7533a3f8",
+        "android_client_info": {
+          "package_name": "com.example.neechat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADdB4vijMW7MiUTdpAOox5nc_j_txEMjQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
