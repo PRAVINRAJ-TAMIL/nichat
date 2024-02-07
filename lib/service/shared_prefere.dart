@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPreferenceHelper {
+class SharedPref {
   static String userId = "USERID";
   static String userName = "USERNAME";
   static String disName = "USERDISNAME";
@@ -55,11 +55,10 @@ class SharedPreferenceHelper {
   Future<bool> saveUserdisName(String getUserdisName) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.setString(disName, getUserdisName);
-
   }
 
-  Future<bool> saveUserDisplayName(String getUserDisplayName)async{
-  SharedPreferences prefs= await SharedPreferences.getInstance();
-  return prefs.setString(disName, getUserDisplayName);
-}
+  Future<bool> saveUserDisplayName(String getUserDisplayName) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setString(disName, getUserDisplayName);
+  }
 }

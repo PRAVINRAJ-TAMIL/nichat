@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:neechat/BottomNavigation/bottomNavigat.dart';
-import 'package:neechat/Screen/home.dart';
+import 'package:neechat/Views/home.dart';
 import 'package:neechat/login/login_Screen.dart';
 
 

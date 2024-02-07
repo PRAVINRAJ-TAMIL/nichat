@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:neechat/BottomNavigation/bottomNavigat.dart';
 import 'package:neechat/service/db.dart';
 import 'package:neechat/service/shared_prefere.dart';
+import 'package:neechat/utils/colors.dart';
 import 'package:random_string/random_string.dart';
 
 class Chat extends StatefulWidget {
@@ -20,10 +23,10 @@ class _ChatState extends State<Chat> {
   Stream? messageStream;
 
   getthesharedpref() async {
-    myUserName = await SharedPreferenceHelper().getUserName();
-    myProfilePic = await SharedPreferenceHelper().getUserImg();
-    myName = await SharedPreferenceHelper().getdisName();
-    myEmail = await SharedPreferenceHelper().getUserMail();
+    myUserName = await SharedPref().getUserName();
+    myProfilePic = await SharedPref().getUserImg();
+    myName = await SharedPref().getdisName();
+    myEmail = await SharedPref().getUserMail();
 
     chatRoomId = getChatRoomIdbyUsername(widget.username, myUserName!);
     setState(() {});
@@ -146,15 +149,36 @@ class _ChatState extends State<Chat> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
+          backgroundColor: COLORNICHAT.BLUES,
            automaticallyImplyLeading: false,
-
-          title:  Text(
-                      widget.name,
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 0, 0, 0),
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w500),
-                    ),
+leading:  GestureDetector(
+  onTap: (){
+    // Get.toEnd(() => BottomNAvigation());
+    Get.to(BottomNAvigation());
+  },
+  child: Icon(Icons.arrow_back_ios_new, color: COLORNICHAT.TEXTCOLOR,)),
+          title:  Row(
+            children: [
+               CircleAvatar(
+                radius: 21,
+                backgroundColor: COLORNICHAT.TEXTCOLOR,
+                 child: CircleAvatar(
+                //  radius: 20,
+                 backgroundColor: COLORNICHAT.GRAY,
+                 backgroundImage: NetworkImage(widget.profileurl,),
+               
+               ),
+               ),
+SizedBox(width: 20,),
+              Text(
+                          widget.name,
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 0, 0, 0),
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w500),
+                        ),
+            ],
+          ),
         ),
         body: Container(
           child: Stack(

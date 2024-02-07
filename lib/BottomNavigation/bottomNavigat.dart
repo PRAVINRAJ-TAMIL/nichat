@@ -1,10 +1,10 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:neechat/Screen/chat.dart';
-import 'package:neechat/Screen/home.dart';
-import 'package:neechat/Screen/me.dart';
-import 'package:neechat/Screen/search.dart';
+import 'package:neechat/Views/chat.dart';
+import 'package:neechat/Views/home.dart';
+import 'package:neechat/Views/me.dart';
+import 'package:neechat/Views/search.dart';
 
 
 class BottomNAvigation extends StatefulWidget {

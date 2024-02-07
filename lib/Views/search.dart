@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:neechat/Screen/chat.dart';
+import 'package:neechat/Views/chat.dart';
 import 'package:neechat/service/db.dart';
+import 'package:neechat/utils/colors.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});
@@ -62,7 +63,7 @@ class _SearchState extends State<Search> {
             Container(
               height: 45,
               decoration: BoxDecoration(
-                color: const Color.fromARGB(230, 222, 221, 221),
+                color: COLORNICHAT.GRAY,
                 borderRadius: new BorderRadius.circular(34),
               ),
               child: TextFormField(
@@ -74,11 +75,11 @@ class _SearchState extends State<Search> {
                     hintText: 'Search',
                     prefixIcon: Icon(Icons.search),
                     hintStyle: TextStyle(
-                        color: Colors.black,
+                        color: COLORNICHAT.TEXTCOLOR,
                         fontSize: 18.0,
                         fontWeight: FontWeight.w500)),
                 style: const TextStyle(
-                    color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.w500),
+                    color: COLORNICHAT.WHITE, fontSize: 18.0, fontWeight: FontWeight.w500),
               ),
             ),
 Divider(thickness: 2,),
@@ -122,7 +123,7 @@ Divider(thickness: 2,),
         child: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-              color: const Color.fromARGB(0, 110, 97, 97), borderRadius: BorderRadius.circular(34)),
+              color: COLORNICHAT.GRAY, borderRadius: BorderRadius.circular(34)),
           child: Row(
             // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -140,7 +141,7 @@ Divider(thickness: 2,),
               Text(
                 data["username"],
                 style: const TextStyle(
-                    color: Colors.black,
+                    color: COLORNICHAT.TEXTCOLOR,
                     fontSize: 15.0,
                     fontWeight: FontWeight.w500),
               )

@@ -8,10 +8,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:neechat/BottomNavigation/bottomNavigat.dart';
-import 'package:neechat/Screen/home.dart';
+import 'package:neechat/Views/home.dart';
 import 'package:neechat/routes.dart';
 import 'package:neechat/service/db.dart';
 import 'package:neechat/service/shared_prefere.dart';
+import 'package:neechat/utils/string.dart';
+
+import '../utils/colors.dart';
 
 
 class LoginScreen extends StatefulWidget {
@@ -45,15 +48,15 @@ class _LoginScreenState extends State<LoginScreen> {
       username = "${querySnapshot.docs[0]["username"]}";
       pic = "${querySnapshot.docs[0]["Photo"]}";
       id = querySnapshot.docs[0].id;
-      await SharedPreferenceHelper().saveUserDisplayName(name);
-      await SharedPreferenceHelper().saveUserName(username);
-      await SharedPreferenceHelper().saveUserId(id);
-      await SharedPreferenceHelper().saveUserImg(pic);
+      await SharedPref().saveUserDisplayName(name);
+      await SharedPref().saveUserName(username);
+      await SharedPref().saveUserId(id);
+      await SharedPref().saveUserImg(pic);
       // Navigator.pushReplacement(
       //     context, MaterialPageRoute(builder: (context) => Home()));
       // print("User Login: ${credential.user!.email}");
       // print("User Login: ${credential.user!.}");
-     
+      Get.toNamed(Routes.bottomnavigation);
 
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const BottomNAvigation()));
@@ -84,14 +87,14 @@ class _LoginScreenState extends State<LoginScreen> {
         body: SingleChildScrollView(
           child: Container(
          
-             decoration: BoxDecoration(
+             decoration: const BoxDecoration(
               gradient: 
               LinearGradient(
               colors: [
-          Colors.blue.shade200,
-          Colors.blue.shade50,
-          Colors.blue.shade50,
-          Colors.blue.shade200
+       COLORNICHAT.BLUE,
+                  COLORNICHAT.BLUES,
+                  COLORNICHAT.BLUES,
+                  COLORNICHAT.BLUE
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -109,12 +112,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 250,
                         child: Lottie.asset("lib/assets/signup.json", fit: BoxFit.fill))),
                       const SizedBox(height: 30),
-                      Text("Sign Up",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),),
+                      const Text(STRINGNICHAI.SIGNIN,style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),),
                       const SizedBox(height: 30),
                 
                       Container(
                           decoration: BoxDecoration(
-                          color: Color.fromARGB(230, 222, 221, 221),
+                          color: COLORNICHAT.GRAY,
                           borderRadius: new BorderRadius.circular(34), 
                         ),
                         child: TextFormField(
@@ -134,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 30),
                       Container(
                           decoration: BoxDecoration(
-                          color: Color.fromARGB(230, 222, 221, 221),
+                          color: COLORNICHAT.GRAY,
                           borderRadius: new BorderRadius.circular(34), 
                         ),
                         child: TextFormField(
@@ -170,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: MediaQuery.of(context).size.width/3,
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blue,
+                              backgroundColor: COLORNICHAT.BTCOLOR,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50),
                               ),
@@ -188,19 +191,19 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             child: isLoading
                                 ? const CircularProgressIndicator()
-                                : const Text("Sign In")),
+                                : const Text(STRINGNICHAI.SIGNIN)),
                       ),
                       const SizedBox(height: 10),
                       Row(
                         mainAxisAlignment:MainAxisAlignment.center ,
                         children: [
-                          const Text("Create Account"),
+                          const Text(STRINGNICHAI.CREATE_ACC),
                        
                       TextButton(
                           onPressed: () {
                             Get.toNamed(Routes.signup);
                           },
-                          child: const Text("Sign Up")), ],
+                          child: const Text(STRINGNICHAI.SIGNUP)), ],
                       ),
                 SizedBox(height:MediaQuery.of(context).size.height/6.8)
                 

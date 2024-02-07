@@ -6,6 +6,8 @@ import 'package:lottie/lottie.dart';
 import 'package:neechat/routes.dart';
 import 'package:neechat/service/db.dart';
 import 'package:neechat/service/shared_prefere.dart';
+import 'package:neechat/utils/colors.dart';
+import 'package:neechat/utils/string.dart';
 import 'package:random_string/random_string.dart';
 
 import 'login_Screen.dart';
@@ -26,12 +28,11 @@ class _SignUpState extends State<SignUp> {
   // final TextEditingController _conpassword = TextEditingController();
   final TextEditingController _name = TextEditingController();
   final form = GlobalKey<FormState>();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   createUserWithEmailAndPassword() async {
     try {
-      final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      // final credential =
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _mail.text,
         password: _password.text,
       );
@@ -39,7 +40,6 @@ class _SignUpState extends State<SignUp> {
       String user = _mail.text.replaceAll("@gmail.com", "");
       String updateusername = user.replaceFirst(user[0], user[0].toUpperCase());
       String firstletter = user.substring(0, 1).toUpperCase();
-
 
       Map<String, dynamic> userInfoMap = {
         "Name": _name.text,
@@ -51,27 +51,26 @@ class _SignUpState extends State<SignUp> {
         "Id": Id,
       };
       await DatabaseMethods().addUserDetails(userInfoMap, Id);
-      await SharedPreferenceHelper().saveUserId(Id);
-      await SharedPreferenceHelper().saveUserDisplayName(_name.text);
-      await SharedPreferenceHelper().saveUserMail(_mail.text);
-      await SharedPreferenceHelper().saveUserImg(
-                      "https://static.vecteezy.com/system/resources/previews/000/643/743/original/people-user-icon-vector.jpg",
-);
-      await SharedPreferenceHelper()
+      await SharedPref().saveUserId(Id);
+      await SharedPref().saveUserDisplayName(_name.text);
+      await SharedPref().saveUserMail(_mail.text);
+      await SharedPref().saveUserImg(
+        "https://static.vecteezy.com/system/resources/previews/000/643/743/original/people-user-icon-vector.jpg",
+      );
+      await SharedPref()
           .saveUserName(_mail.text.replaceAll("@gmail.com", "").toUpperCase());
 
       navigator?.pushNamed(LoginScreen as String);
-      print("User Register: ${credential.user!.email}");
-      print("======================================================================");
+      // print("User Register: ${credential.user!.email}");
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+        // print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        // print('The account already exists for that email.');
       }
     } catch (e) {
-      print("Error:$e");
-      print(e);
+      // print("Error:$e");
+      // print(e);
     }
   }
 
@@ -85,23 +84,19 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-  
         body: SingleChildScrollView(
           child: Container(
-            // height: double.maxFinite,
-            // width: double.maxFinite,
-            decoration: BoxDecoration(
-              gradient: 
-              LinearGradient(
-              colors: [
-          Colors.blue.shade200,
-          Colors.blue.shade50,
-          Colors.blue.shade50,
-          Colors.blue.shade200
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  COLORNICHAT.BLUE,
+                  COLORNICHAT.BLUES,
+                  COLORNICHAT.BLUES,
+                  COLORNICHAT.BLUE
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
             ),
             child: Padding(
               padding: const EdgeInsets.all(14.0),
@@ -112,21 +107,24 @@ class _SignUpState extends State<SignUp> {
                   children: [
                     const SizedBox(height: 40),
                     Container(
-                     height:MediaQuery.of(context).size.height/3.8,
-                     width: MediaQuery.of(context).size.width/1,
+                        height: MediaQuery.of(context).size.height / 3.8,
+                        width: MediaQuery.of(context).size.width / 1,
                         alignment: Alignment.center,
-                        child:
-                             Lottie.asset("lib/assets/signin.json", fit: BoxFit.fill)),
-                    // const SizedBox(height: 30),
+                        child: Lottie.asset("lib/assets/signin.json",
+                            fit: BoxFit.fill)),
+                    const SizedBox(height: 10),
 
-
-Text("Sign Up",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),),
-SizedBox(height: 30),
+                    const Text(
+                      STRINGNICHAI.SIGNUP,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+                    ),
+                    const SizedBox(height: 30),
 
                     Container(
-                        decoration: BoxDecoration(
-                        color: Color.fromARGB(230, 222, 221, 221),
-                        borderRadius: new BorderRadius.circular(34), 
+                      decoration: BoxDecoration(
+                        color: COLORNICHAT.GRAY,
+                        borderRadius: BorderRadius.circular(34),
                       ),
                       child: TextFormField(
                         controller: _name,
@@ -136,19 +134,18 @@ SizedBox(height: 30),
                           }
                           return null;
                         },
-                        decoration: InputDecoration(
-                                                    border: InputBorder.none,
+                        decoration: const InputDecoration(
+                            border: InputBorder.none,
                             hintText: "User Name",
-
-                            prefixIcon: const Icon(Icons.person_2_rounded)),
+                            prefixIcon: Icon(Icons.person_2_rounded)),
                       ),
                     ),
                     const SizedBox(height: 30),
-                  
-                        Container(
-                        decoration: BoxDecoration(
-                        color: Color.fromARGB(230, 222, 221, 221),
-                        borderRadius: new BorderRadius.circular(34), 
+
+                    Container(
+                      decoration: BoxDecoration(
+                        color: COLORNICHAT.GRAY,
+                        borderRadius: BorderRadius.circular(34),
                       ),
                       child: TextFormField(
                         controller: _mail,
@@ -158,32 +155,18 @@ SizedBox(height: 30),
                           }
                           return null;
                         },
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             // border: const OutlineInputBorder(),
                             border: InputBorder.none,
                             hintText: 'Enter Mail',
-                            prefixIcon: const Icon(Icons.mail_outline)),
+                            prefixIcon: Icon(Icons.mail_outline)),
                       ),
                     ),
                     const SizedBox(height: 30),
-                    //  TextFormField(
-                    //   controller: password,
-                    //    validator: (text){
-                    //       if(text==null|| text.isEmpty){
-                    //         return "Enter Passowrd";
-                    //       }
-                    //       return null;
-                    //     },
-                    //     decoration: InputDecoration(
-                    //         border: const OutlineInputBorder(),
-                    //         label: Text(MEDSTRING.enter_ph),
-                    //         prefixIcon: const Icon(Icons.phone_iphone)),
-                    //   ),
-                    // const SizedBox(height: 30),
-                      Container(
-                        decoration: BoxDecoration(
-                        color: Color.fromARGB(230, 222, 221, 221),
-                        borderRadius: new BorderRadius.circular(34), 
+                    Container(
+                      decoration: BoxDecoration(
+                        color: COLORNICHAT.GRAY,
+                        borderRadius: BorderRadius.circular(34),
                       ),
                       child: TextFormField(
                         controller: _password,
@@ -216,42 +199,41 @@ SizedBox(height: 30),
                     ),
                     const SizedBox(height: 20),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width/3,
+                      width: MediaQuery.of(context).size.width / 3,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(255, 128, 171, 244),
+                            backgroundColor:
+                                COLORNICHAT.BTCOLOR,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50),
                             ),
                           ),
                           onPressed: () {
                             if (form.currentState!.validate()) {
-                              print("valide");
+                              // print("valide");
                               createUserWithEmailAndPassword();
                               Get.toNamed(Routes.loginscreen);
                             }
                           },
-                          child: Text("Sign Up")),
+                          child: const Text(STRINGNICHAI.SIGNUP)),
                     ),
                     const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Already Have Account?"),
-                   
-                    TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoginScreen()));
-                        },
-                        child: Text("Sign In")),
-
-                      
-                           ],
+                        const Text(STRINGNICHAI.HAVE_ACC),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const LoginScreen()));
+                            },
+                            child: const Text(STRINGNICHAI.SIGNIN)),
+                      ],
                     ),
-                    SizedBox(height:MediaQuery.of(context).size.height/6.8)
+                    SizedBox(height: MediaQuery.of(context).size.height / 6.8)
                   ],
                 ),
               ),

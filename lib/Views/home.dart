@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:neechat/Screen/chat.dart';
-import 'package:neechat/Screen/chatRoom.dart';
+import 'package:neechat/Views/chat.dart';
+import 'package:neechat/Views/chatRoom.dart';
 import 'package:neechat/service/db.dart';
 import 'package:neechat/service/shared_prefere.dart';
+import 'package:neechat/utils/colors.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -19,10 +20,10 @@ class _HomeState extends State<Home> {
   Stream? chatRoomsStream;
 
   getthesharedpref() async {
-    myName = await SharedPreferenceHelper().getdisName();
-    myProfilePic = await SharedPreferenceHelper().getUserImg();
-    myUserName = await SharedPreferenceHelper().getUserName();
-    myEmail = await SharedPreferenceHelper().getUserMail();
+    myName = await SharedPref().getdisName();
+    myProfilePic = await SharedPref().getUserImg();
+    myUserName = await SharedPref().getUserName();
+    myEmail = await SharedPref().getUserMail();
     setState(() {});
   }
 
@@ -60,14 +61,14 @@ class _HomeState extends State<Home> {
             slivers:[
               
 SliverAppBar(
-  backgroundColor: Colors.blue.shade100,
+  backgroundColor:COLORNICHAT.BLUES,
             centerTitle: true,
              automaticallyImplyLeading: false,
-            title: const Text('Nechat',style: TextStyle(fontSize: 24,fontWeight: FontWeight.w900,color: Colors.black),),
+            title: const Text('NiChat',style: TextStyle(fontSize: 24,fontWeight: FontWeight.w900,color: Colors.black),),
                    bottom: AppBar(
                             centerTitle: true,
  automaticallyImplyLeading: false,
-   backgroundColor: Colors.blue.shade100,
+   backgroundColor: COLORNICHAT.BLUES,
 
               title: Container(
                   height: 45,

@@ -1,12 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:neechat/Screen/chat.dart';
+import 'package:neechat/Views/chat.dart';
 import 'package:neechat/service/db.dart';
+
+import '../utils/colors.dart';
 
 class ChatRoomListTile extends StatefulWidget {
   final String lastMessage, chatRoomId, myUsername, time;
   const ChatRoomListTile(
-      {super.key, required this.chatRoomId,
+      {super.key,
+      required this.chatRoomId,
       required this.lastMessage,
       required this.myUsername,
       required this.time});
@@ -35,8 +38,6 @@ class _ChatRoomListTileState extends State<ChatRoomListTile> {
     getthisUserInfo();
     super.initState();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -76,18 +77,18 @@ class _ChatRoomListTileState extends State<ChatRoomListTile> {
                 ),
                 Text(
                   username,
-                  style: const TextStyle(
-                      color: Colors.black,
+                  style: TextStyle(
+                      color: COLORNICHAT.TEXTCOLOR,
                       fontSize: 17.0,
                       fontWeight: FontWeight.w500),
                 ),
                 Container(
-                  width: MediaQuery.of(context).size.width/2,
+                  width: MediaQuery.of(context).size.width / 2,
                   child: Text(
                     widget.lastMessage,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
-                        color: Colors.black45,
+                        color: COLORNICHAT.TEXTCOLOR,
                         fontSize: 15.0,
                         fontWeight: FontWeight.w500),
                   ),
@@ -98,7 +99,7 @@ class _ChatRoomListTileState extends State<ChatRoomListTile> {
             Text(
               widget.time,
               style: const TextStyle(
-                  color: Colors.black45,
+                  color: COLORNICHAT.TEXTCOLOR,
                   fontSize: 14.0,
                   fontWeight: FontWeight.w500),
             ),
@@ -107,7 +108,4 @@ class _ChatRoomListTileState extends State<ChatRoomListTile> {
       ),
     );
   }
-
-
-  
 }
