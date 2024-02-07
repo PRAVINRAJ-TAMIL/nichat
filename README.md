@@ -65,4 +65,5 @@ flutter run
   cloud_firestore: ^4.14.0
   shared_preferences: ^2.2.2
 ## License
+  This project is licensed under the MIT License.
   
