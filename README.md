@@ -64,6 +64,11 @@ flutter run
   firebase_messaging: ^14.7.10
   cloud_firestore: ^4.14.0
   shared_preferences: ^2.2.2
+## Splash Screen
+ ![ni](https://github.com/PRAVINRAJ-TAMIL/neechat/assets/114245769/9a3027fa-b5a0-4fc1-8e12-2f4ffe587f8a)
+## UI Screen
+![Section 8](https://github.com/PRAVINRAJ-TAMIL/neechat/assets/114245769/777d9a0f-51bd-419a-b442-2b5e6215ba7d)
+  
 ## License
   This project is licensed under the MIT License.
   
